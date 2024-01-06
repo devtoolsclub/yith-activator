@@ -140,6 +140,8 @@ if ( ! class_exists( 'YITH_Activator' ) ) {
             }
 
             update_option('yit_products_licence_activation', $license_options);
+			update_option('yit_plugin_licence_activation', $license_options);
+			update_option('yit_theme_licence_activation', $license_options);
         }
 
         private function is_plugin_active($plugin_slug) {
