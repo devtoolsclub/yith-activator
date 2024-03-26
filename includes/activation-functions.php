@@ -8,3 +8,9 @@ function yith_disable_license_activation_redirect() {
 function yith_override_onboarding_queue() {
     set_transient('yith_plugin_licence_onboarding_queue', array(), 1);
 }
+
+function remove_yith_license_banner() {
+    // Remove actions that enqueue banner scripts and styles
+    remove_action('admin_notices', array('YITH\PluginUpgrade\Admin\Banner', 'register_scripts'), 5);
+    remove_action('yith_plugin_fw_panel_enqueue_scripts', array('YITH\PluginUpgrade\Admin\Banner', 'maybe_enqueue_and_render_licence_banner'));
+}

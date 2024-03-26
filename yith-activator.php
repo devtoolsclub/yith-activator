@@ -2,7 +2,7 @@
 /**
  * Plugin Name: YITH License Activator 
  * Description: The ultimate tool for seamless activation of premium YITH plugins. Activate YITH's premium plugins effortlessly while removing intrusive banners and forms.
- * Version: 1.1
+ * Version: 1.2
  * Author: GPL Community
  * Author URI: https://devtools.club/gpl/
  * License: GPL v2 or later
@@ -10,8 +10,8 @@
  * Requires PHP: 7.4
  * Update URI: https://github.com/devtoolsclub/yith-activator
  * Tags: yith, woocommerce, activation, license, register, form, key
- * WC requires at least: 8.0
- * WC tested up to: 8.4
+ * WC requires at least: 8.3
+ * WC tested up to: 8.6.x
  */
 // For support or inquiries, email us at: members@devtools.club
 
@@ -34,3 +34,10 @@ add_action('plugins_loaded', 'yith_activator_initialize');
 add_action('plugins_loaded', 'yith_disable_license_activation_redirect');
 add_action('admin_init', 'yith_override_onboarding_queue', 0);
 add_action('admin_init', 'yith_custom_disable_update_check');
+add_action('admin_init', 'remove_yith_license_banner');
+
+add_action('before_woocommerce_init', function(){
+    if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+    }
+});
